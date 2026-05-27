@@ -1,0 +1,174 @@
+<Window x:Class="FoodDelivery.Views.Windows.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Criar conta" Height="620" Width="860"
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize">
+    <Grid Margin="24">
+        <Border Style="{StaticResource Card}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Criar conta" FontSize="24" FontWeight="SemiBold"/>
+                    <TextBlock Margin="0,8,0,0" Foreground="{StaticResource BrushTextMuted}"
+                               Text="Escolha um tipo de usuário e preencha os dados."/>
+                </StackPanel>
+
+                <TabControl Grid.Row="1" Margin="0,18,0,0" Background="{StaticResource BrushSurface}">
+                    <TabItem Header="Cliente">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Grid Margin="18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.ColumnSpan="2">
+                                    <TextBlock Text="Nome" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="CliNome" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="E-mail" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="CliEmail" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,14,10,0">
+                                    <TextBlock Text="Senha" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <PasswordBox x:Name="CliSenha" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,14,0,0">
+                                    <TextBlock Text="Telefone" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="CliTelefone" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="Endereço" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="CliEndereco" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="Cancelar" Width="140" Margin="0,0,10,0" Click="Cancel_Click"/>
+                                    <Button Content="Criar conta" Width="140" Style="{StaticResource PrimaryButton}" Click="CreateCliente_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="Restaurante">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Grid Margin="18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.ColumnSpan="2">
+                                    <TextBlock Text="Nome do responsável" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResNomeUsuario" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="E-mail" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResEmail" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="Senha" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <PasswordBox x:Name="ResSenha" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="Nome do restaurante" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResNomeRestaurante" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,14,10,0">
+                                    <TextBlock Text="Telefone" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResTelefone" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,14,0,0">
+                                    <TextBlock Text="Endereço" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResEndereco" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="Descrição" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="ResDescricao" Margin="0,8,0,0" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="Cancelar" Width="140" Margin="0,0,10,0" Click="Cancel_Click"/>
+                                    <Button Content="Criar conta" Width="140" Style="{StaticResource PrimaryButton}" Click="CreateRestaurante_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="Motoboy">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Grid Margin="18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.ColumnSpan="2">
+                                    <TextBlock Text="Nome" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="MotNome" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,14,0,0">
+                                    <TextBlock Text="E-mail" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="MotEmail" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,14,10,0">
+                                    <TextBlock Text="Senha" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <PasswordBox x:Name="MotSenha" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,14,0,0">
+                                    <TextBlock Text="Placa" Foreground="{StaticResource BrushTextMuted}"/>
+                                    <TextBox x:Name="MotPlaca" Margin="0,8,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="Cancelar" Width="140" Margin="0,0,10,0" Click="Cancel_Click"/>
+                                    <Button Content="Criar conta" Width="140" Style="{StaticResource PrimaryButton}" Click="CreateMotoboy_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

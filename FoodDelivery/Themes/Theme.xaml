@@ -1,0 +1,30 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="ColorBg">#FF0F1115</Color>
+    <Color x:Key="ColorSurface">#FF151922</Color>
+    <Color x:Key="ColorSurface2">#FF1B2230</Color>
+    <Color x:Key="ColorBorder">#FF263044</Color>
+    <Color x:Key="ColorText">#FFF2F5FA</Color>
+    <Color x:Key="ColorTextMuted">#FFB4BFD6</Color>
+    <Color x:Key="ColorAccent">#FF6EE7B7</Color>
+    <Color x:Key="ColorDanger">#FFF87171</Color>
+    <Color x:Key="ColorWarn">#FFFBBF24</Color>
+    <Color x:Key="ColorInfo">#FF60A5FA</Color>
+
+    <SolidColorBrush x:Key="BrushBg" Color="{StaticResource ColorBg}"/>
+    <SolidColorBrush x:Key="BrushSurface" Color="{StaticResource ColorSurface}"/>
+    <SolidColorBrush x:Key="BrushSurface2" Color="{StaticResource ColorSurface2}"/>
+    <SolidColorBrush x:Key="BrushBorder" Color="{StaticResource ColorBorder}"/>
+    <SolidColorBrush x:Key="BrushText" Color="{StaticResource ColorText}"/>
+    <SolidColorBrush x:Key="BrushTextMuted" Color="{StaticResource ColorTextMuted}"/>
+    <SolidColorBrush x:Key="BrushAccent" Color="{StaticResource ColorAccent}"/>
+    <SolidColorBrush x:Key="BrushDanger" Color="{StaticResource ColorDanger}"/>
+    <SolidColorBrush x:Key="BrushWarn" Color="{StaticResource ColorWarn}"/>
+    <SolidColorBrush x:Key="BrushInfo" Color="{StaticResource ColorInfo}"/>
+
+    <Thickness x:Key="ThicknessPage">20</Thickness>
+    <CornerRadius x:Key="RadiusMd">14</CornerRadius>
+    <CornerRadius x:Key="RadiusSm">10</CornerRadius>
+
+    <FontFamily x:Key="FontDefault">Segoe UI</FontFamily>
+</ResourceDictionary>

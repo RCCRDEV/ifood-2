@@ -1,0 +1,67 @@
+<Window x:Class="FoodDelivery.Views.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FoodDelivery • Login" Height="520" Width="860"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource BrushSurface}">
+            <Grid Margin="28">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="FoodDelivery" FontSize="34" FontWeight="SemiBold" />
+                    <TextBlock Margin="0,12,0,0" Foreground="{StaticResource BrushTextMuted}" FontSize="14"
+                               TextWrapping="Wrap"
+                               Text="Sistema moderno de delivery: clientes, restaurantes, motoboys e administração."/>
+                    <Border Margin="0,24,0,0" Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="Acesso admin" FontWeight="SemiBold" />
+                            <TextBlock Margin="0,6,0,0" Foreground="{StaticResource BrushTextMuted}" Text="E-mail: admin@local" />
+                            <TextBlock Foreground="{StaticResource BrushTextMuted}" Text="Senha: Admin123!" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="36">
+            <Border Style="{StaticResource Card}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Entrar" FontSize="24" FontWeight="SemiBold" />
+
+                    <StackPanel Grid.Row="1" Margin="0,20,0,0">
+                        <TextBlock Text="E-mail" Foreground="{StaticResource BrushTextMuted}" />
+                        <TextBox x:Name="EmailTextBox" Margin="0,8,0,0" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="0,16,0,0">
+                        <TextBlock Text="Senha" Foreground="{StaticResource BrushTextMuted}" />
+                        <PasswordBox x:Name="PasswordBox" Margin="0,8,0,0" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Margin="0,22,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Criar conta" Width="140" Margin="0,0,10,0" Click="CreateAccount_Click"/>
+                        <Button Content="Entrar" Width="140" Style="{StaticResource PrimaryButton}" Click="Login_Click"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="4" Margin="0,18,0,0"
+                               Foreground="{StaticResource BrushTextMuted}"
+                               TextWrapping="Wrap"
+                               Text="Dica: você pode criar contas de Cliente, Restaurante ou Motoboy na opção 'Criar conta'."/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
+

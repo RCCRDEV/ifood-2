@@ -26,9 +26,10 @@ public partial class CarrinhoPage : Page
 
     private void Reload()
     {
-        CartGrid.ItemsSource = null;
-        CartGrid.ItemsSource = _session.Cart.Items;
-        TotalText.Text = $"Total: {_session.Cart.Total:C}";
+        var items = _session.Cart.Items.ToList();
+        CartItems.ItemsSource = items;
+        EmptyCartPanel.Visibility = items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        TotalText.Text = $"{_session.Cart.Total:C}";
     }
 
     private void Remove_Click(object sender, RoutedEventArgs e)

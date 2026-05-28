@@ -27,7 +27,8 @@ public partial class PedidosClientePage : Page
     {
         if (_session.CurrentUser is not global::FoodDelivery.Models.Users.Cliente cliente) return;
         var list = await _service.ListPedidosAsync(cliente.Id);
-        PedidosGrid.ItemsSource = list;
+        PedidosItems.ItemsSource = list;
+        EmptyOrdersPanel.Visibility = list.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private async void Refresh_Click(object sender, RoutedEventArgs e)

@@ -15,8 +15,7 @@ public sealed class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<Foo
             .Build();
 
         var optionsBuilder = new DbContextOptionsBuilder<FoodDeliveryDbContext>();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
+        optionsBuilder.UseSqlite(configuration.GetConnectionString("Default"));
         return new FoodDeliveryDbContext(optionsBuilder.Options);
     }
 }
-

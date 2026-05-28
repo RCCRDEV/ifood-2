@@ -16,29 +16,56 @@
         <UniformGrid Grid.Row="1" Margin="0,14,0,0" Columns="4">
             <Border Style="{StaticResource Card}" Margin="0,0,14,0">
                 <StackPanel>
-                    <TextBlock Text="Usuários" Foreground="{StaticResource BrushTextMuted}"/>
-                    <TextBlock x:Name="UsuariosText" FontSize="26" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="34" Height="34" CornerRadius="12" Background="{StaticResource BrushAccentSoft}" Margin="0,0,10,0">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushAccent2}" />
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Usuários" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}"/>
+                            <TextBlock x:Name="UsuariosText" FontSize="28" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Card}" Margin="0,0,14,0">
                 <StackPanel>
-                    <TextBlock Text="Restaurantes" Foreground="{StaticResource BrushTextMuted}"/>
-                    <TextBlock x:Name="RestaurantesText" FontSize="26" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="34" Height="34" CornerRadius="12" Background="{StaticResource BrushAccentSoft}" Margin="0,0,10,0">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushAccent}" />
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Restaurantes" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}"/>
+                            <TextBlock x:Name="RestaurantesText" FontSize="28" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Card}" Margin="0,0,14,0">
                 <StackPanel>
-                    <TextBlock Text="Pedidos" Foreground="{StaticResource BrushTextMuted}"/>
-                    <TextBlock x:Name="PedidosText" FontSize="26" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="34" Height="34" CornerRadius="12" Background="{StaticResource BrushSurface2}" Margin="0,0,10,0">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushWarn}" />
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Pedidos" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}"/>
+                            <TextBlock x:Name="PedidosText" FontSize="28" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Card}">
                 <StackPanel>
-                    <TextBlock Text="Pedidos hoje" Foreground="{StaticResource BrushTextMuted}"/>
-                    <TextBlock x:Name="PedidosHojeText" FontSize="26" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="34" Height="34" CornerRadius="12" Background="{StaticResource BrushSurface2}" Margin="0,0,10,0">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushInfo}" />
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Pedidos hoje" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}"/>
+                            <TextBlock x:Name="PedidosHojeText" FontSize="28" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </UniformGrid>
     </Grid>
 </Page>
-

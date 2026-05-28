@@ -9,20 +9,78 @@
         </Grid.RowDefinitions>
 
         <DockPanel>
-            <TextBlock Text="Meus pedidos" FontSize="18" FontWeight="SemiBold" DockPanel.Dock="Left"/>
-            <Button Content="Atualizar" Width="140" Style="{StaticResource PrimaryButton}" DockPanel.Dock="Right" Click="Refresh_Click"/>
+            <TextBlock Text="Meus pedidos" FontSize="{StaticResource FontSizeH1}" FontWeight="SemiBold" DockPanel.Dock="Left"/>
+            <Button Content="Atualizar" Width="140" Style="{StaticResource SecondaryButton}" DockPanel.Dock="Right" Click="Refresh_Click"/>
         </DockPanel>
 
-        <Border Grid.Row="1" Margin="0,14,0,0" Style="{StaticResource Card}">
-            <DataGrid x:Name="PedidosGrid">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Data" Binding="{Binding DataPedidoUtc}" Width="180" />
-                    <DataGridTextColumn Header="Restaurante" Binding="{Binding RestauranteNome}" Width="*" />
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="180" />
-                    <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="140" />
-                </DataGrid.Columns>
-            </DataGrid>
+        <Border Grid.Row="1" Margin="0,14,0,0" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Padding="16" Effect="{StaticResource ShadowSm}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Border x:Name="EmptyOrdersPanel" Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusMd}" Padding="18" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Nenhum pedido ainda" FontWeight="SemiBold" FontSize="16"/>
+                            <TextBlock Margin="0,8,0,0" Foreground="{StaticResource BrushTextMuted}" Text="Quando você fizer um pedido, ele vai aparecer aqui com o status atualizado."/>
+                        </StackPanel>
+                    </Border>
+
+                    <ItemsControl x:Name="PedidosItems" Margin="0,0,0,10">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,12" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Padding="14" Effect="{StaticResource ShadowSm}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding RestauranteNome}" FontWeight="SemiBold" FontSize="15"/>
+                                            <TextBlock Margin="0,6,0,0" Foreground="{StaticResource BrushTextMuted}" Text="{Binding DataPedidoUtc, StringFormat={}{0:dd/MM/yyyy HH:mm}}"/>
+                                        </StackPanel>
+
+                                        <Border Grid.Column="1" CornerRadius="999" Padding="10,6" Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" VerticalAlignment="Top">
+                                            <TextBlock Text="{Binding Status}" FontSize="{StaticResource FontSizeSmall}" FontWeight="SemiBold">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="{StaticResource BrushTextMuted}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Entregue">
+                                                                <Setter Property="Foreground" Value="#FF047857"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="SaiuParaEntrega">
+                                                                <Setter Property="Foreground" Value="{StaticResource BrushInfo}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="EmPreparo">
+                                                                <Setter Property="Foreground" Value="{StaticResource BrushWarn}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Cancelado">
+                                                                <Setter Property="Foreground" Value="{StaticResource BrushDanger}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,12,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Foreground="{StaticResource BrushTextMuted}" Text="{Binding Itens.Count, StringFormat=Itens: {0}}"/>
+                                            <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="{Binding Total, StringFormat=Total: R$ {0:N2}}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Page>
-

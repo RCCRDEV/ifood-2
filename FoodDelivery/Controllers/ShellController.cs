@@ -35,10 +35,10 @@ public sealed class ShellController
         {
             Cliente => new[]
             {
-                new ShellNavItem("Restaurantes", "", "cliente.restaurantes"),
+                new ShellNavItem("Restaurantes", "", "cliente.restaurantes"),
                 new ShellNavItem("Carrinho", "", "cliente.carrinho"),
                 new ShellNavItem("Pedidos", "", "cliente.pedidos"),
-                new ShellNavItem("Perfil", "", "cliente.perfil")
+                new ShellNavItem("Perfil", "", "cliente.perfil")
             },
             RestauranteUser => new[]
             {
@@ -47,14 +47,14 @@ public sealed class ShellController
             },
             Motoboy => new[]
             {
-                new ShellNavItem("Disponíveis", "", "moto.disponiveis"),
+                new ShellNavItem("Disponíveis", "", "moto.disponiveis"),
                 new ShellNavItem("Histórico", "", "moto.historico")
             },
             Administrador => new[]
             {
                 new ShellNavItem("Dashboard", "", "admin.dashboard"),
-                new ShellNavItem("Usuários", "", "admin.usuarios"),
-                new ShellNavItem("Restaurantes", "", "admin.restaurantes"),
+                new ShellNavItem("Usuários", "", "admin.usuarios"),
+                new ShellNavItem("Restaurantes", "", "admin.restaurantes"),
                 new ShellNavItem("Pedidos", "", "admin.pedidos")
             },
             _ => Array.Empty<ShellNavItem>()
@@ -93,4 +93,3 @@ public sealed class ShellController
 }
 
 public sealed record ShellNavItem(string Label, string IconGlyph, string Route);
-

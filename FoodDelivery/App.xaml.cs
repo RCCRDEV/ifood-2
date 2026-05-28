@@ -40,7 +40,7 @@ public partial class App : Application
                 .ConfigureServices((context, services) =>
                 {
                     services.AddDbContext<FoodDeliveryDbContext>(options =>
-                        options.UseSqlServer(context.Configuration.GetConnectionString("Default")));
+                        options.UseSqlite(context.Configuration.GetConnectionString("Default")));
 
                     services.AddSingleton<AppSession>();
 
@@ -87,7 +87,7 @@ public partial class App : Application
             using (var scope = _host.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<FoodDeliveryDbContext>();
-                db.Database.EnsureCreated();
+                db.Database.Migrate();
                 SeedData.EnsureSeeded(scope.ServiceProvider);
             }
 
@@ -150,7 +150,7 @@ public partial class App : Application
         sb.AppendLine("O aplicativo fechou ao iniciar.");
         sb.AppendLine();
         sb.AppendLine("Causas comuns:");
-        sb.AppendLine("- SQL Server LocalDB não instalado (connection string padrão usa (localdb)\\MSSQLLocalDB).");
+        sb.AppendLine("- SQLite não conseguiu criar/acessar o arquivo FoodDelivery.db (permissões/pasta).");
         sb.AppendLine("- Connection string incorreta no appsettings.json.");
         sb.AppendLine();
         sb.AppendLine("Detalhes:");

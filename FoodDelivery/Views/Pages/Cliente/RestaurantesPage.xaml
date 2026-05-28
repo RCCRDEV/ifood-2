@@ -4,56 +4,139 @@
       Title="Restaurantes">
     <Grid Margin="{StaticResource ThicknessPage}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width="18"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource Card}" Grid.Column="0">
+        <Border Grid.Column="0" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Padding="16" Effect="{StaticResource ShadowSm}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Restaurantes" FontSize="18" FontWeight="SemiBold"/>
-                <DataGrid Grid.Row="1" Margin="0,14,0,0"
-                          x:Name="RestaurantesGrid"
-                          SelectionMode="Single"
-                          SelectionChanged="RestaurantesGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*" />
-                        <DataGridTextColumn Header="Endereço" Binding="{Binding Endereco}" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
+
+                <TextBlock Text="Restaurantes" FontSize="{StaticResource FontSizeH1}" FontWeight="SemiBold"/>
+
+                <Border Grid.Row="1" Margin="0,12,0,0" Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusMd}" Padding="12,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource BrushTextMuted}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBox Grid.Column="1" x:Name="SearchTextBox" BorderThickness="0" Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="SearchTextBox_TextChanged" />
+                    </Grid>
+                </Border>
+
+                <ListBox Grid.Row="2" Margin="0,14,0,0"
+                         x:Name="RestaurantesListBox"
+                         Style="{StaticResource NavListBox}"
+                         ItemContainerStyle="{StaticResource NavListBoxItem}"
+                         SelectionChanged="RestaurantesListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Nome}" FontWeight="SemiBold" FontSize="15"/>
+                                <TextBlock Grid.Row="1" Margin="0,6,0,0" Text="{Binding Descricao}" Foreground="{StaticResource BrushTextMuted}" TextTrimming="CharacterEllipsis"/>
+                                <StackPanel Grid.Row="2" Margin="0,10,0,0" Orientation="Horizontal">
+                                    <Border Background="{StaticResource BrushAccentSoft}" CornerRadius="10" Padding="8,4" Margin="0,0,8,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource BrushAccent}" Margin="0,0,6,0"/>
+                                            <TextBlock Text="4,8" Foreground="{StaticResource BrushAccent}" FontWeight="SemiBold" FontSize="{StaticResource FontSizeSmall}"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="8,4" Margin="0,0,8,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource BrushTextMuted}" Margin="0,0,6,0"/>
+                                            <TextBlock Text="25-40 min" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="8,4">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource BrushTextMuted}" Margin="0,0,6,0"/>
+                                            <TextBlock Text="{Binding Endereco}" Foreground="{StaticResource BrushTextMuted}" FontSize="{StaticResource FontSizeSmall}" TextTrimming="CharacterEllipsis" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Border>
 
-        <Border Style="{StaticResource Card}" Grid.Column="1" Margin="18,0,0,0">
+        <Border Grid.Column="2" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Effect="{StaticResource ShadowSm}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Cardápio" FontSize="18" FontWeight="SemiBold"/>
-                <TextBlock x:Name="SelectedRestauranteText" Grid.Row="1" Margin="0,8,0,0" Foreground="{StaticResource BrushTextMuted}"/>
+                <Grid Margin="18">
+                    <Border Background="{StaticResource BrushAccentGradient}" CornerRadius="{StaticResource RadiusLg}" Opacity="0.10"/>
+                    <StackPanel Margin="16">
+                        <TextBlock x:Name="RestauranteTitleText" FontSize="{StaticResource FontSizeTitle}" FontWeight="SemiBold" Text="Escolha um restaurante"/>
+                        <TextBlock x:Name="RestauranteSubtitleText" Margin="0,8,0,0" Foreground="{StaticResource BrushTextMuted}" Text="Selecione ao lado para ver o cardápio e adicionar itens ao carrinho."/>
+                    </StackPanel>
+                </Grid>
 
-                <DataGrid Grid.Row="2" Margin="0,14,0,0" x:Name="ProdutosGrid" SelectionMode="Single">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Produto" Binding="{Binding Nome}" Width="*" />
-                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="140" />
-                        <DataGridTextColumn Header="Preço" Binding="{Binding Preco}" Width="140" />
-                        <DataGridTemplateColumn Header="" Width="160">
-                            <DataGridTemplateColumn.CellTemplate>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="18">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12" VerticalAlignment="Center">
+                            <TextBlock Text="Cardápio" FontSize="{StaticResource FontSizeH1}" FontWeight="SemiBold" />
+                            <Border Margin="10,0,0,0" Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="10,6">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource BrushTextMuted}" Margin="0,0,8,0"/>
+                                    <TextBlock x:Name="CartHintText" Foreground="{StaticResource BrushTextMuted}" Text="Dica: o carrinho fica no menu" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <WrapPanel x:Name="CategoriaPanel" Margin="0,0,0,14" />
+
+                        <ItemsControl x:Name="ProdutosItems">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="Adicionar" Style="{StaticResource PrimaryButton}" Click="AddToCart_Click" Tag="{Binding}" />
+                                    <Border Width="320" Margin="0,0,14,14" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Padding="14" Effect="{StaticResource ShadowSm}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{Binding Nome}" FontWeight="SemiBold" FontSize="15" />
+                                            <TextBlock Grid.Row="1" Margin="0,6,0,0" Text="{Binding Descricao}" Foreground="{StaticResource BrushTextMuted}" TextWrapping="Wrap" MaxHeight="38" />
+                                            <Grid Grid.Row="2" Margin="0,12,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" Text="{Binding Preco, StringFormat=R$ {0:N2}}" />
+                                                <Button Grid.Column="1" Content="Adicionar" Style="{StaticResource PrimaryButton}" Padding="14,8" MinHeight="38"
+                                                        Click="AddToCart_Click" Tag="{Binding}" />
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
                                 </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Border>
     </Grid>
 </Page>
-

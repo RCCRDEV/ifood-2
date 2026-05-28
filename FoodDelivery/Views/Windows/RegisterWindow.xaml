@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Criar conta" Height="620" Width="860"
         WindowStartupLocation="CenterOwner" ResizeMode="CanResize">
-    <Grid Margin="24">
-        <Border Style="{StaticResource Card}">
+    <Grid Margin="18">
+        <Border CornerRadius="{StaticResource RadiusLg}" Background="{StaticResource BrushSurface}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" Padding="22" Effect="{StaticResource ShadowMd}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -12,12 +12,15 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel>
-                    <TextBlock Text="Criar conta" FontSize="24" FontWeight="SemiBold"/>
+                    <TextBlock Text="Criar conta" FontSize="{StaticResource FontSizeH1}" FontWeight="SemiBold"/>
                     <TextBlock Margin="0,8,0,0" Foreground="{StaticResource BrushTextMuted}"
                                Text="Escolha um tipo de usuário e preencha os dados."/>
                 </StackPanel>
 
-                <TabControl Grid.Row="1" Margin="0,18,0,0" Background="{StaticResource BrushSurface}">
+                <TabControl Grid.Row="1" Margin="0,18,0,0" Style="{StaticResource TabControlModern}" Background="Transparent">
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem" BasedOn="{StaticResource TabItemModern}" />
+                    </TabControl.Resources>
                     <TabItem Header="Cliente">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <Grid Margin="18">

@@ -3,6 +3,7 @@ using FoodDelivery.DTOs;
 using FoodDelivery.DTOs.Requests;
 using FoodDelivery.Helpers;
 using FoodDelivery.Models;
+using FoodDelivery.Models.Enums;
 using FoodDelivery.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,6 +69,10 @@ public sealed class ClienteService : IClienteService
         {
             ClienteId = request.ClienteId,
             RestauranteId = request.RestauranteId,
+            MetodoPagamento = request.MetodoPagamento,
+            StatusPagamento = request.MetodoPagamento == MetodoPagamento.Dinheiro ? StatusPagamento.Pendente : StatusPagamento.Aprovado,
+            DataPagamentoUtc = request.MetodoPagamento == MetodoPagamento.Dinheiro ? null : DateTime.UtcNow,
+            Status = PedidoStatus.AguardandoConfirmacaoLoja,
             Observacoes = request.Observacoes?.Trim()
         };
 
@@ -98,6 +103,24 @@ public sealed class ClienteService : IClienteService
         return list.Select(p => p.ToDto()).ToList();
     }
 
+    public async Task CancelarPedidoAsync(Guid clienteId, Guid pedidoId, string motivo, CancellationToken ct = default)
+    {
+        if (clienteId == Guid.Empty || pedidoId == Guid.Empty)
+            throw new FriendlyException("Pedido inválido.");
+
+        var pedido = await _pedidos.GetByIdAsync(pedidoId, ct);
+        if (pedido is null)
+            throw new FriendlyException("Pedido não encontrado.");
+
+        if (pedido.ClienteId != clienteId)
+            throw new FriendlyException("Você não tem permissão para cancelar este pedido.");
+
+        if (pedido.Status != PedidoStatus.AguardandoConfirmacaoLoja)
+            throw new FriendlyException("Você só pode cancelar antes da loja confirmar.");
+
+        await _pedidos.CancelAsync(pedidoId, motivo, ct);
+    }
+
     public async Task FavoritarAsync(Guid clienteId, Guid restauranteId, CancellationToken ct = default)
     {
         var exists = await _db.FavoritosRestaurantes.AnyAsync(f => f.ClienteId == clienteId && f.RestauranteId == restauranteId, ct);
@@ -120,4 +143,3 @@ public sealed class ClienteService : IClienteService
         await _db.SaveChangesAsync(ct);
     }
 }
-

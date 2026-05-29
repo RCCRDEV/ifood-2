@@ -63,14 +63,24 @@ namespace FoodDelivery.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CancelamentoMotivo")
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAtUtc")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("DataPagamentoUtc")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DataPedidoUtc")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("MetodoPagamento")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("MotoboyId")
                         .HasColumnType("TEXT");
@@ -83,6 +93,9 @@ namespace FoodDelivery.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StatusPagamento")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

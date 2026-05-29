@@ -62,8 +62,8 @@
                 </Grid>
 
                 <StackPanel Grid.Row="1" Margin="0,12,0,0">
-                    <TextBlock Text="Observações (opcional)" Foreground="{StaticResource BrushTextMuted}"/>
-                    <TextBox x:Name="ObsTextBox" Margin="0,8,0,0" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Text="Observações (no checkout)" Foreground="{StaticResource BrushTextMuted}"/>
+                    <TextBox x:Name="ObsTextBox" Margin="0,8,0,0" Height="70" TextWrapping="Wrap" AcceptsReturn="True" IsEnabled="False" Opacity="0.7"/>
                 </StackPanel>
             </Grid>
         </Border>

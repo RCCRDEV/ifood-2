@@ -8,6 +8,7 @@ using FoodDelivery.Views.Pages.Cliente;
 using FoodDelivery.Views.Pages.Motoboy;
 using FoodDelivery.Views.Pages.Restaurante;
 using FoodDelivery.Views.Windows;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace FoodDelivery;
 
@@ -31,16 +34,24 @@ public partial class App : Application
 
         try
         {
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
             _host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration(config =>
                 {
-                    config.SetBasePath(Directory.GetCurrentDirectory());
-                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    config.SetBasePath(AppContext.BaseDirectory);
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddDbContext<FoodDeliveryDbContext>(options =>
-                        options.UseSqlite(context.Configuration.GetConnectionString("Default")));
+                    {
+                        var raw = context.Configuration.GetConnectionString("Default");
+                        var builder = new SqliteConnectionStringBuilder(string.IsNullOrWhiteSpace(raw) ? "Data Source=FoodDelivery.db" : raw);
+                        if (!string.IsNullOrWhiteSpace(builder.DataSource) && !Path.IsPathRooted(builder.DataSource))
+                            builder.DataSource = Path.Combine(AppContext.BaseDirectory, builder.DataSource);
+                        options.UseSqlite(builder.ConnectionString);
+                    });
 
                     services.AddSingleton<AppSession>();
 
@@ -65,6 +76,7 @@ public partial class App : Application
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<RegisterWindow>();
                     services.AddTransient<ShellWindow>();
+                    services.AddTransient<CheckoutWindow>();
 
                     services.AddTransient<RestaurantesPage>();
                     services.AddTransient<CarrinhoPage>();

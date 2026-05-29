@@ -73,6 +73,17 @@ public sealed class PedidoRepository : IPedidoRepository
         await _db.SaveChangesAsync(ct);
     }
 
+    public async Task CancelAsync(Guid pedidoId, string motivo, CancellationToken ct = default)
+    {
+        var pedido = await _db.Pedidos.FirstOrDefaultAsync(p => p.Id == pedidoId, ct);
+        if (pedido is null) return;
+        pedido.Status = PedidoStatus.Cancelado;
+        pedido.CancelamentoMotivo = string.IsNullOrWhiteSpace(motivo) ? "Cancelado." : motivo.Trim();
+        if (pedido.MetodoPagamento != MetodoPagamento.Dinheiro && pedido.StatusPagamento == StatusPagamento.Aprovado)
+            pedido.StatusPagamento = StatusPagamento.Estornado;
+        await _db.SaveChangesAsync(ct);
+    }
+
     public async Task AssignMotoboyAsync(Guid pedidoId, Guid motoboyId, CancellationToken ct = default)
     {
         var pedido = await _db.Pedidos.FirstOrDefaultAsync(p => p.Id == pedidoId, ct);
@@ -92,4 +103,3 @@ public sealed class PedidoRepository : IPedidoRepository
                 .ThenInclude(i => i.Produto);
     }
 }
-

@@ -1,6 +1,7 @@
 using FoodDelivery.DTOs;
 using FoodDelivery.Helpers;
 using FoodDelivery.Services;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -50,6 +51,52 @@ public partial class EntregasDisponiveisPage : Page
         catch (Exception)
         {
             MessageBox.Show("Não foi possível aceitar.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void CopyAddress_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (Grid.SelectedItem is not PedidoDto pedido)
+                throw new FriendlyException("Selecione uma entrega.");
+
+            if (string.IsNullOrWhiteSpace(pedido.ClienteEndereco))
+                throw new FriendlyException("Cliente sem endereço cadastrado.");
+
+            Clipboard.SetText(pedido.ClienteEndereco.Trim());
+            MessageBox.Show("Endereço copiado.", "Entregas", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (FriendlyException ex)
+        {
+            MessageBox.Show(ex.Message, "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Não foi possível copiar.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void OpenMaps_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (Grid.SelectedItem is not PedidoDto pedido)
+                throw new FriendlyException("Selecione uma entrega.");
+
+            if (string.IsNullOrWhiteSpace(pedido.ClienteEndereco))
+                throw new FriendlyException("Cliente sem endereço cadastrado.");
+
+            var url = "https://www.google.com/maps/search/?api=1&query=" + Uri.EscapeDataString(pedido.ClienteEndereco.Trim());
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch (FriendlyException ex)
+        {
+            MessageBox.Show(ex.Message, "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Não foi possível abrir o Maps.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

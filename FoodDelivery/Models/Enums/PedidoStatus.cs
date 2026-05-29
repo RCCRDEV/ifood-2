@@ -6,6 +6,7 @@ public enum PedidoStatus
     EmPreparo = 2,
     SaiuParaEntrega = 3,
     Entregue = 4,
-    Cancelado = 5
+    Cancelado = 5,
+    AguardandoConfirmacaoLoja = 6,
+    EmEntrega = 7
 }
-

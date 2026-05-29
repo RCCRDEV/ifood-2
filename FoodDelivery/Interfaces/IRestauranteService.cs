@@ -11,5 +11,6 @@ public interface IRestauranteService
     Task ExcluirProdutoAsync(Guid produtoId, CancellationToken ct = default);
     Task<List<PedidoDto>> ListPedidosAsync(Guid restauranteId, CancellationToken ct = default);
     Task AtualizarStatusAsync(Guid pedidoId, PedidoStatus status, CancellationToken ct = default);
+    Task ConfirmarPedidoAsync(Guid pedidoId, CancellationToken ct = default);
+    Task RecusarPedidoAsync(Guid pedidoId, string motivo, CancellationToken ct = default);
 }
-

@@ -176,3 +176,6 @@ c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\bin\Release\net8.
 c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\bin\Release\net8.0-windows\runtimes\win-arm64\native\e_sqlite3.dll
 c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\bin\Release\net8.0-windows\runtimes\win-x64\native\e_sqlite3.dll
 c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\bin\Release\net8.0-windows\runtimes\win-x86\native\e_sqlite3.dll
+c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\obj\Release\net8.0-windows\Views\Windows\CheckoutWindow.baml
+c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\obj\Release\net8.0-windows\Views\Windows\CheckoutWindow.g.cs
+c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\obj\Release\net8.0-windows\FoodDelivery_MarkupCompile.lref

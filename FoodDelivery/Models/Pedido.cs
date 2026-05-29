@@ -15,7 +15,16 @@ public sealed class Pedido : BaseEntity
     public Guid? MotoboyId { get; set; }
     public Motoboy? Motoboy { get; set; }
 
-    public PedidoStatus Status { get; set; } = PedidoStatus.Recebido;
+    public PedidoStatus Status { get; set; } = PedidoStatus.AguardandoConfirmacaoLoja;
+
+    public MetodoPagamento MetodoPagamento { get; set; } = MetodoPagamento.Pix;
+
+    public StatusPagamento StatusPagamento { get; set; } = StatusPagamento.Pendente;
+
+    public DateTime? DataPagamentoUtc { get; set; }
+
+    [MaxLength(250)]
+    public string? CancelamentoMotivo { get; set; }
 
     [MaxLength(400)]
     public string? Observacoes { get; set; }
@@ -26,4 +35,3 @@ public sealed class Pedido : BaseEntity
 
     public decimal Total => Itens.Sum(i => i.Subtotal);
 }
-

@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP
 c:\Users\Rafael\OneDrive\Documentos\meupc\ifood 2\FoodDelivery\App.xaml
-171989341752
+181180995353
 
-77-2069725880
+82516296785
 236-1599235327
-Themes\Controls.xaml;Themes\Theme.xaml;Views\Pages\Admin\DashboardAdminPage.xaml;Views\Pages\Admin\PedidosAdminPage.xaml;Views\Pages\Admin\RestaurantesAdminPage.xaml;Views\Pages\Admin\UsuariosAdminPage.xaml;Views\Pages\Cliente\CarrinhoPage.xaml;Views\Pages\Cliente\PedidosClientePage.xaml;Views\Pages\Cliente\PerfilClientePage.xaml;Views\Pages\Cliente\RestaurantesPage.xaml;Views\Pages\Motoboy\EntregasDisponiveisPage.xaml;Views\Pages\Motoboy\HistoricoEntregasPage.xaml;Views\Pages\Restaurante\PedidosRestaurantePage.xaml;Views\Pages\Restaurante\ProdutosPage.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\RegisterWindow.xaml;Views\Windows\ShellWindow.xaml;
+Themes\Controls.xaml;Themes\Theme.xaml;Views\Pages\Admin\DashboardAdminPage.xaml;Views\Pages\Admin\PedidosAdminPage.xaml;Views\Pages\Admin\RestaurantesAdminPage.xaml;Views\Pages\Admin\UsuariosAdminPage.xaml;Views\Pages\Cliente\CarrinhoPage.xaml;Views\Pages\Cliente\PedidosClientePage.xaml;Views\Pages\Cliente\PerfilClientePage.xaml;Views\Pages\Cliente\RestaurantesPage.xaml;Views\Pages\Motoboy\EntregasDisponiveisPage.xaml;Views\Pages\Motoboy\HistoricoEntregasPage.xaml;Views\Pages\Restaurante\PedidosRestaurantePage.xaml;Views\Pages\Restaurante\ProdutosPage.xaml;Views\Windows\CheckoutWindow.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\RegisterWindow.xaml;Views\Windows\ShellWindow.xaml;
 
 False
 

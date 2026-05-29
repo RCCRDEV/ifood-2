@@ -111,6 +111,49 @@ public sealed class RestauranteService : IRestauranteService
 
     public async Task AtualizarStatusAsync(Guid pedidoId, PedidoStatus status, CancellationToken ct = default)
     {
+        var pedido = await _pedidos.GetByIdAsync(pedidoId, ct);
+        if (pedido is null)
+            throw new FriendlyException("Pedido não encontrado.");
+
+        if (pedido.Status == PedidoStatus.AguardandoConfirmacaoLoja)
+            throw new FriendlyException("Confirme ou recuse o pedido antes de alterar o status.");
+
+        if (status is PedidoStatus.EmEntrega or PedidoStatus.Entregue)
+            throw new FriendlyException("O status de entrega é atualizado pelo motoboy.");
+
+        if (status == PedidoStatus.EmPreparo && pedido.Status is not (PedidoStatus.Recebido or PedidoStatus.EmPreparo))
+            throw new FriendlyException("Para iniciar o preparo, o pedido precisa estar recebido.");
+
+        if (status == PedidoStatus.SaiuParaEntrega && pedido.Status != PedidoStatus.EmPreparo)
+            throw new FriendlyException("Para sair para entrega, o pedido precisa estar em preparo.");
+
+        if (status is not (PedidoStatus.EmPreparo or PedidoStatus.SaiuParaEntrega))
+            throw new FriendlyException("Status inválido para o restaurante.");
+
         await _pedidos.UpdateStatusAsync(pedidoId, status, ct);
+    }
+
+    public async Task ConfirmarPedidoAsync(Guid pedidoId, CancellationToken ct = default)
+    {
+        var pedido = await _pedidos.GetByIdAsync(pedidoId, ct);
+        if (pedido is null)
+            throw new FriendlyException("Pedido não encontrado.");
+
+        if (pedido.Status != PedidoStatus.AguardandoConfirmacaoLoja)
+            throw new FriendlyException("Este pedido não está aguardando confirmação.");
+
+        await _pedidos.UpdateStatusAsync(pedidoId, PedidoStatus.EmPreparo, ct);
+    }
+
+    public async Task RecusarPedidoAsync(Guid pedidoId, string motivo, CancellationToken ct = default)
+    {
+        var pedido = await _pedidos.GetByIdAsync(pedidoId, ct);
+        if (pedido is null)
+            throw new FriendlyException("Pedido não encontrado.");
+
+        if (pedido.Status != PedidoStatus.AguardandoConfirmacaoLoja)
+            throw new FriendlyException("Este pedido não está aguardando confirmação.");
+
+        await _pedidos.CancelAsync(pedidoId, motivo, ct);
     }
 }

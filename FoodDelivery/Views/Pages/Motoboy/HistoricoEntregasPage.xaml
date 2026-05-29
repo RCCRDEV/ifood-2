@@ -15,20 +15,64 @@
         </DockPanel>
 
         <Border Grid.Row="1" Margin="0,14,0,0" Style="{StaticResource Card}">
-            <DataGrid x:Name="Grid" SelectionMode="Single">
+            <DataGrid x:Name="Grid" SelectionMode="Single" RowDetailsVisibilityMode="VisibleWhenSelected">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Data" Binding="{Binding DataPedidoUtc}" Width="180" />
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="110" />
                     <DataGridTextColumn Header="Restaurante" Binding="{Binding RestauranteNome}" Width="*" />
                     <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNome}" Width="220" />
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="190" />
+                    <DataGridTextColumn Header="Telefone" Binding="{Binding ClienteTelefone}" Width="160" />
+                    <DataGridTextColumn Header="Endereço" Binding="{Binding ClienteEndereco}" Width="360" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding StatusLabel}" Width="190" />
                     <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="140" />
                 </DataGrid.Columns>
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource BrushSurface2}" BorderBrush="{StaticResource BrushBorder}" BorderThickness="1" CornerRadius="{StaticResource RadiusMd}" Padding="12" Margin="0,10,0,2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{StaticResource BrushTextMuted}" Text="Pagamento: "/>
+                                    <TextBlock Text="{Binding PagamentoLabel}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Margin="0,8,0,0">
+                                    <TextBlock Foreground="{StaticResource BrushTextMuted}" Text="Observações"/>
+                                    <TextBlock Margin="0,4,0,0" Text="{Binding Observacoes}" TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                                    <TextBlock Foreground="{StaticResource BrushTextMuted}" Text="Itens"/>
+                                    <ItemsControl Margin="0,6,0,0" ItemsSource="{Binding Itens}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Left" Text="{Binding Quantidade}" Width="28" Foreground="{StaticResource BrushTextMuted}" />
+                                                    <TextBlock DockPanel.Dock="Left" Text="{Binding ProdutoNome}" />
+                                                    <TextBlock DockPanel.Dock="Right" Text="{Binding Subtotal}" Foreground="{StaticResource BrushTextMuted}" />
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
             </DataGrid>
         </Border>
 
         <StackPanel Grid.Row="2" Margin="0,14,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Copiar endereço" Width="160" Margin="0,0,10,0" Style="{StaticResource SecondaryButton}" Click="CopyAddress_Click"/>
+            <Button Content="Abrir no Maps" Width="160" Margin="0,0,10,0" Style="{StaticResource SecondaryButton}" Click="OpenMaps_Click"/>
+            <Button Content="Não entregue" Width="160" Margin="0,0,10,0" Style="{StaticResource DangerButton}" Click="NotDelivered_Click"/>
             <Button Content="Marcar como entregue" Width="220" Style="{StaticResource PrimaryButton}" Click="Delivered_Click"/>
         </StackPanel>
     </Grid>
 </Page>
-

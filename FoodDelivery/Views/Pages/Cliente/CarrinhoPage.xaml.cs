@@ -1,6 +1,7 @@
-using FoodDelivery.DTOs.Requests;
 using FoodDelivery.Helpers;
 using FoodDelivery.Services;
+using FoodDelivery.Views.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,12 +10,12 @@ namespace FoodDelivery.Views.Pages.Cliente;
 public partial class CarrinhoPage : Page
 {
     private readonly AppSession _session;
-    private readonly IClienteService _service;
+    private readonly IServiceProvider _services;
 
-    public CarrinhoPage(AppSession session, IClienteService service)
+    public CarrinhoPage(AppSession session, IServiceProvider services)
     {
         _session = session;
-        _service = service;
+        _services = services;
         InitializeComponent();
         Loaded += CarrinhoPage_Loaded;
     }
@@ -45,28 +46,17 @@ public partial class CarrinhoPage : Page
         Reload();
     }
 
-    private async void Checkout_Click(object sender, RoutedEventArgs e)
+    private void Checkout_Click(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (_session.CurrentUser is not global::FoodDelivery.Models.Users.Cliente cliente)
-                throw new FriendlyException("Sessão inválida.");
-
             if (_session.Cart.RestauranteId is null)
                 throw new FriendlyException("Carrinho vazio.");
 
-            var request = new CreatePedidoRequest(
-                cliente.Id,
-                _session.Cart.RestauranteId.Value,
-                ObsTextBox.Text,
-                _session.Cart.Items.Select(i => new CreatePedidoItemRequest(i.ProdutoId, i.Quantidade)).ToList()
-            );
-
-            var pedido = await _service.CriarPedidoAsync(request);
-            _session.Cart.Clear();
+            var window = _services.GetRequiredService<CheckoutWindow>();
+            window.Owner = Window.GetWindow(this);
+            window.ShowDialog();
             Reload();
-
-            MessageBox.Show($"Pedido criado com sucesso. Total: {pedido.Total:C}", "Pedido", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (FriendlyException ex)
         {
@@ -74,7 +64,7 @@ public partial class CarrinhoPage : Page
         }
         catch (Exception)
         {
-            MessageBox.Show("Não foi possível finalizar o pedido.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Não foi possível abrir o checkout.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

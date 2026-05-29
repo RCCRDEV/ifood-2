@@ -83,6 +83,9 @@ public sealed class FoodDeliveryDbContext : DbContext
                 .WithMany(m => m.Entregas)
                 .HasForeignKey(x => x.MotoboyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            e.Property(x => x.MetodoPagamento).HasConversion<int>();
+            e.Property(x => x.StatusPagamento).HasConversion<int>();
         });
 
         modelBuilder.Entity<ItemPedido>(e =>
@@ -117,4 +120,3 @@ public sealed class FoodDeliveryDbContext : DbContext
         });
     }
 }
-

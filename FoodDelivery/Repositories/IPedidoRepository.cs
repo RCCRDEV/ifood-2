@@ -13,6 +13,6 @@ public interface IPedidoRepository
     Task<List<Pedido>> ListAllAsync(CancellationToken ct = default);
     Task AddAsync(Pedido pedido, CancellationToken ct = default);
     Task UpdateStatusAsync(Guid pedidoId, PedidoStatus status, CancellationToken ct = default);
+    Task CancelAsync(Guid pedidoId, string motivo, CancellationToken ct = default);
     Task AssignMotoboyAsync(Guid pedidoId, Guid motoboyId, CancellationToken ct = default);
 }
-
